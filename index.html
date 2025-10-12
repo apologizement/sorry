@@ -1,0 +1,151 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm You're a Human</title>
+  <style>
+    body {
+      background-color: #f6f8fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #222;
+      transition: background 0.3s ease;
+    }
+
+    .container {
+      background: #fff;
+      border: 1px solid #dcdcdc;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      padding: 40px 30px;
+      text-align: center;
+      width: 340px;
+      transition: opacity 0.4s ease;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-weight: 600;
+      color: #111;
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .verify-box {
+      background-color: #fafafa;
+      border: 1px solid #d6d6d6;
+      border-radius: 8px;
+      padding: 18px 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .verify-box:hover {
+      background-color: #f1f1f1;
+    }
+
+    input[type="checkbox"] {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+    }
+
+    .text {
+      font-size: 15px;
+      color: #222;
+      user-select: none;
+    }
+
+    /* Loading screen */
+    .loading-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f6f8fb;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      animation: fadein 0.5s ease;
+    }
+
+    .spinner {
+      border: 5px solid #ddd;
+      border-top: 5px solid #555;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 18px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .footer-text {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- Main container -->
+  <div class="container" id="mainContainer">
+    <h2>Confirm You're a Human</h2>
+    <div class="verify-box" id="verifyBox">
+      <input type="checkbox" id="robotCheck">
+      <div class="text">I'm not a robot</div>
+    </div>
+    <div class="footer-text">This process helps protect our website from bots.</div>
+  </div>
+
+  <!-- Fake loading screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="spinner"></div>
+    <div id="loadingText">Checking your browser before accessing site...</div>
+    <div class="footer-text">Please wait, this process is automatic.</div>
+  </div>
+
+  <script>
+    const checkbox = document.getElementById("robotCheck");
+    const mainContainer = document.getElementById("mainContainer");
+    const loadingScreen = document.getElementById("loadingScreen");
+    const loadingText = document.getElementById("loadingText");
+
+    checkbox.addEventListener("change", function() {
+      if (this.checked) {
+        // Hide main container and show fake loading
+        mainContainer.style.display = "none";
+        loadingScreen.style.display = "flex";
+
+        // Sequence of text changes
+        setTimeout(() => loadingText.textContent = "Verifying your connection...", 1200);
+        setTimeout(() => loadingText.textContent = "Almost done...", 2500);
+
+        // Redirect after all fake checks
+        setTimeout(() => {
+          window.location.href = "https://example.com"; // Change this URL
+        }, 4000); // 4 seconds total
+      }
+    });
+  </script>
+</body>
+</html>
